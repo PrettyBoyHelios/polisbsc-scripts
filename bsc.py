@@ -24,6 +24,11 @@ class RPCNode:
         pending_polis = self.polis_staking_contract.functions.pendingPolis(0, self.dao_address).call()
         print("Pending Polis to Claim: {} POLIS".format(pending_polis/1e18))
 
-    def get_delegated_votes(self, address):
+    def get_delegated_votes(self, address: str) -> float:
+        """
+        Returns the amount of delegated votes to an address at the latest block.
+        :param address: address used to query the total amount of delegated votes.
+        :return: the amount of votes delegated to a given address.
+        """
         votes = self.polis_validator_contract.functions.getCurrentVotes(address).call()
         return votes/1e18
